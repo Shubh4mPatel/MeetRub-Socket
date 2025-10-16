@@ -10,7 +10,6 @@ const socketAuth = (io) => {
       const token = parsed.orangeAccessToken;
 
       if (!token) return next(new Error('Authentication error'));
-
       const user = jwt.verify(token, process.env.JWT_SECRET);
       socket.user = user; // Uncommented - you'll likely need this
       next();
