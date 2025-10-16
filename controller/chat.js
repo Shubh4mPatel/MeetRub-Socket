@@ -1,4 +1,5 @@
 const chatModel = require('../model/chatmodel');
+const redis = require('../config/reddis');
 
 // Store for online users
 const onlineUsers = new Map(); // userId -> socketId
@@ -15,9 +16,10 @@ const chatController = (io) => {
       await chatModel.createOrGetUser(userId, username);
 
       // Store user's socket connection
-      onlineUsers.set(userId, socket.id);
+      await redis.set(`user:${userId}:online`, "true", "EX", 3600);
+      await redis.sadd("online_users", userId);
 
-      // Emit online users list to all clients
+      // Emit online users list to this perticular client not done yet 
       io.emit('online-users', Array.from(onlineUsers.keys()));
 
       // Get unread count for this user
@@ -196,11 +198,12 @@ const chatController = (io) => {
     });
 
     // Handle disconnect
-    socket.on('disconnect', () => {
+    socket.on('disconnect',async () => {
       console.log(`User disconnected: ${username} (${userId})`);
 
       // Remove from online users
-      onlineUsers.delete(userId);
+      await redis.del(`user:${userId}:online`);
+      await redis.srem("online_users", userId);
 
       // Notify all clients about updated online users
       io.emit('online-users', Array.from(onlineUsers.keys()));
