@@ -1,0 +1,34 @@
+{
+  "name": "meetrub-socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubh4mPatel/MeetRub-Socket.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubh4mPatel/MeetRub-Socket/issues"
+  },
+  "homepage": "https://github.com/Shubh4mPatel/MeetRub-Socket#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jszip": "^3.10.1",
+    "moment": "^2.30.1",
+    "momnet": "^0.0.1-security",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.9",
+    "nodemon": "^3.1.10",
+    "socketio": "^1.0.0",
+    "winston": "^3.18.3"
+  }
+}
