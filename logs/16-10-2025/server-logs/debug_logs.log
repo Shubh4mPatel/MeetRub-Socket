@@ -225,3 +225,16 @@
 [16-10-2025 15:44:30 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
 [16-10-2025 15:44:30 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
 [16-10-2025 15:44:30 +0530] - [INFO] - [src\server.js:37] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 15:45:28 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 15:45:29 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 15:45:29 +0530] - [INFO] - [src\server.js:37] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 15:46:24 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 15:46:25 +0530] - [WARN] - [cron\logmanager.js:113] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 15:46:25 +0530] - [INFO] - [src\server.js:37] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 15:46:53 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 15:46:53 +0530] - [WARN] - [cron\logmanager.js:113] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 15:46:53 +0530] - [INFO] - [src\server.js:37] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 15:47:26 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 15:47:26 +0530] - [INFO] - [cron\logmanager.js:117] - Running daily log zipping task
+[16-10-2025 15:47:26 +0530] - [INFO] - [cron\logmanager.js:101] - No folders older than 15 days to zip.
+[16-10-2025 15:47:26 +0530] - [INFO] - [src\server.js:37] - Server running in development mode on 192.168.3.110:5000
