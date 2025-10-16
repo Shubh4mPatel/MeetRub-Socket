@@ -2,3 +2,106 @@
 [16-10-2025 11:45:08 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
 [16-10-2025 11:45:08 +0530] - [INFO] - [src\server.js:32] - Server running in development mode on 192.168.3.110:5000
 [16-10-2025 11:45:10 +0530] - [INFO] - [src\server.js:38] - Received SIGINT. Shutting down gracefully...
+[16-10-2025 11:47:16 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 11:47:17 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 11:47:17 +0530] - [INFO] - [src\server.js:32] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:23:28 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:23:28 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:23:28 +0530] - [INFO] - [src\server.js:39] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:26:59 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:00 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:00 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:09 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:10 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:10 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:32 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:32 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:32 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:37 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:38 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:38 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:48 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:48 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:48 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:52 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:52 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:52 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:56 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:56 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:56 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:27:57 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:27:58 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:27:58 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:04 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:05 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:05 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:16 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:16 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:16 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:22 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:23 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:23 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:33 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:33 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:33 +0530] - [INFO] - [src\server.js:40] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:36 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:36 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:36 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:38 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:39 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:39 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:28:43 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:28:43 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:28:43 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:39:17 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:39:17 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:39:17 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:39:33 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:39:33 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:39:33 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:39:38 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:39:39 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:39:39 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:39:50 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:39:51 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:39:51 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:00 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:01 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:01 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:04 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:04 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:04 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:06 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:07 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:07 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:09 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:09 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:09 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:13 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:14 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:14 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:16 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:16 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:16 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:44:26 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:44:26 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:44:26 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:48:03 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:48:04 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:48:04 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:48:07 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:48:08 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:48:08 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:48:10 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:48:10 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:48:10 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:48:15 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:48:16 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:48:16 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 12:48:22 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 12:48:22 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 12:48:22 +0530] - [INFO] - [src\server.js:41] - Server running in development mode on 192.168.3.110:5000
+[16-10-2025 15:10:04 +0530] - [INFO] - [src\server.js:47] - Received SIGINT. Shutting down gracefully...
+[16-10-2025 15:22:16 +0530] - [INFO] - [utils\logger.js:289] - Logger initialized
+[16-10-2025 15:22:17 +0530] - [WARN] - [cron\logmanager.js:112] - Logs directory does not exist: C:\Users\baps\logs
+[16-10-2025 15:22:17 +0530] - [INFO] - [src\server.js:33] - Server running in development mode on 192.168.3.110:5000
