@@ -6,6 +6,7 @@ dotenv.config();
 const socketConfig = require('../config/socketConfig');
 const { logger } = require('../utils/logger');
 const { manageLogFiles } = require('../cron/logmanager');
+const { socketAuth } = require('../middleware/authentication');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,7 +15,7 @@ const io = socketIo(server,socketConfig);
 
 // Make io available to routes
 app.set('io', io);
-
+socketAuth(io);
 
 let serverWithSocket;
 const PORT = process.env.PORT || 5000;
