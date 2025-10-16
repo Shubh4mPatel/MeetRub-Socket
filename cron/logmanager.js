@@ -105,7 +105,6 @@ function zipOldFolders(sourceDir, outputZipPath) {
 const manageLogFiles = () => {
     try {
         const currentDir = __dirname;
-        console.log('Current Directory:', currentDir);
         const parentDir = path.resolve(currentDir, '../logs');
         
         // Check if logs directory exists
