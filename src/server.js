@@ -7,6 +7,7 @@ const socketConfig = require('../config/socketConfig');
 const { logger } = require('../utils/logger');
 const { manageLogFiles } = require('../cron/logmanager');
 const { socketAuth } = require('../middleware/authentication');
+const { startMasterWorker } = require('../consumers/worker');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,11 +24,14 @@ const HOST = process.env.HOST || ''
 if(process.env.NODE_ENV !== 'development'){
   serverWithSocket= server.listen(PORT, HOST, () => {
     manageLogFiles();
+startMasterWorker();
+
     // startCronJobs(io);
   logger.info(`Server running in ${process.env.NODE_ENV} mode on ${HOST}:${PORT}`);
 });
 } else{
   serverWithSocket = server.listen(PORT, () => {
+startMasterWorker();
     manageLogFiles();
     // startCronJobs(io);
   logger.info(`Server running in ${process.env.NODE_ENV} mode on ${HOST}:${PORT}`);
