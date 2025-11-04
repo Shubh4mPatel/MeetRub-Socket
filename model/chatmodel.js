@@ -2,19 +2,13 @@ const pool = require('../config/dbConfig');
 
 const chatModel = {
   // Create or get user
-  async createOrGetUser(userId, username) {
+  async GetUser(userId, username) {
     const query = `
-      INSERT INTO users (user_id, username, last_seen)
-      VALUES ($1, $2, CURRENT_TIMESTAMP)
-      ON CONFLICT (user_id) 
-      DO UPDATE SET 
-        username = EXCLUDED.username,
-        last_seen = CURRENT_TIMESTAMP
-      RETURNING *
+      SELECT * FROM users WHERE id=$1
     `;
     
     try {
-      const result = await pool.query(query, [userId, username]);
+      const result = await pool.query(query, [userId]);
       return result.rows[0];
     } catch (error) {
       console.error('Error creating/updating user:', error);

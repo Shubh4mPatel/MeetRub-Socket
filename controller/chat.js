@@ -1,26 +1,31 @@
 const chatModel = require('../model/chatmodel');
 const redis = require('../config/reddis');
 
-// Store for online users
-const onlineUsers = new Map(); // userId -> socketId
-
 const chatController = (io) => {
   io.on('connection', async (socket) => {
-    const userId = socket.user.userId;
-    const username = socket.user.username;
+    console.log(socket.user)
+    const userId = socket.user.user_id;
+    const username = socket.user.name;
 
     console.log(`User connected: ${username} (${userId})`);
 
     try {
       // Create or update user in database
-      await chatModel.createOrGetUser(userId, username);
+      await chatModel.GetUser(userId, username);
 
-      // Store user's socket connection
+      // Store user's socket connection in Redis
+      await redis.set(`user:${userId}:socketId`, socket.id, "EX", 3600);
+      await redis.set(`user:${userId}:username`, username, "EX", 3600);
       await redis.set(`user:${userId}:online`, "true", "EX", 3600);
-      await redis.sadd("online_users", userId);
 
-      // Emit online users list to this perticular client not done yet 
-      io.emit('online-users', Array.from(onlineUsers.keys()));
+      // Add user to online users set
+      await redis.sAdd("online_users", `${userId}`);
+
+      // Get all online users from Redis
+      const onlineUserIds = await redis.sMembers("online_users");
+
+      // Emit online users list to all clients
+      io.emit('online-users', onlineUserIds);
 
       // Get unread count for this user
       const unreadCount = await chatModel.getUnreadCount(userId);
@@ -41,6 +46,9 @@ const chatController = (io) => {
         await chatModel.getOrCreateChatRoom(userId, recipientId);
 
         socket.join(chatRoomId);
+
+        // Store active chat room in Redis
+        await redis.set(`user:${userId}:activeRoom`, chatRoomId, "EX", 3600);
 
         console.log(`${username} joined chat room: ${chatRoomId}`);
 
@@ -68,11 +76,15 @@ const chatController = (io) => {
     });
 
     // Leave a chat room
-    socket.on('leave-chat', ({ recipientId }) => {
+    socket.on('leave-chat', async ({ recipientId }) => {
       const [smallerId, largerId] = [userId, recipientId].sort();
       const chatRoomId = `${smallerId}-${largerId}`;
 
       socket.leave(chatRoomId);
+
+      // Remove active room from Redis
+      await redis.del(`user:${userId}:activeRoom`);
+
       console.log(`${username} left chat room: ${chatRoomId}`);
     });
 
@@ -104,14 +116,26 @@ const chatController = (io) => {
         // Send message to the chat room (both users)
         io.to(chatRoomId).emit('receive-message', messageData);
 
-        // If recipient is online, notify them
-        if (onlineUsers.has(recipientId)) {
-          const recipientSocketId = onlineUsers.get(recipientId);
-          io.to(recipientSocketId).emit('new-message-notification', {
-            senderId: userId,
-            senderUsername: username,
-            message
-          });
+        // Check if recipient is online using Redis
+        const recipientOnline = await redis.get(`user:${recipientId}:online`);
+
+        if (recipientOnline) {
+          const recipientSocketId = await redis.get(`user:${recipientId}:socketId`);
+
+          if (recipientSocketId) {
+            // Check if recipient is in the same chat room
+            const recipientActiveRoom = await redis.get(`user:${recipientId}:activeRoom`);
+
+            if (recipientActiveRoom !== chatRoomId) {
+              // Only send notification if recipient is not in the same chat room
+              io.to(recipientSocketId).emit('new-message-notification', {
+                senderId: userId,
+                senderUsername: username,
+                message,
+                chatRoomId
+              });
+            }
+          }
         }
 
         console.log(`Message saved: ${username} to ${recipientId}`);
@@ -123,29 +147,53 @@ const chatController = (io) => {
     });
 
     // Typing indicator
-    socket.on('typing', ({ recipientId, isTyping }) => {
-      const [smallerId, largerId] = [userId, recipientId].sort();
-      const chatRoomId = `${smallerId}-${largerId}`;
+    socket.on('typing', async ({ recipientId, isTyping }) => {
+      try {
+        const [smallerId, largerId] = [userId, recipientId].sort();
+        const chatRoomId = `${smallerId}-${largerId}`;
 
-      socket.to(chatRoomId).emit('user-typing', {
-        userId,
-        username,
-        isTyping
-      });
+        // Store typing status in Redis with short expiry
+        if (isTyping) {
+          await redis.setex(`typing:${chatRoomId}:${userId}`, 5, "true");
+        } else {
+          await redis.del(`typing:${chatRoomId}:${userId}`);
+        }
+
+        socket.to(chatRoomId).emit('user-typing', {
+          userId,
+          username,
+          isTyping
+        });
+      } catch (error) {
+        console.error('Error handling typing indicator:', error);
+      }
     });
 
     // Get user's all chat rooms
     socket.on('get-chat-rooms', async () => {
       try {
         const chatRooms = await chatModel.getUserChatRooms(userId);
-        socket.emit('chat-rooms-list', { chatRooms });
+
+        // Enhance chat rooms with online status from Redis
+        const enhancedChatRooms = await Promise.all(
+          chatRooms.map(async (room) => {
+            const otherUserId = room.user1_id === userId ? room.user2_id : room.user1_id;
+            const isOnline = await redis.get(`user:${otherUserId}:online`);
+
+            return {
+              ...room,
+              isOnline: !!isOnline
+            };
+          })
+        );
+
+        socket.emit('chat-rooms-list', { chatRooms: enhancedChatRooms });
       } catch (error) {
         console.error('Error getting chat rooms:', error);
         socket.emit('error', { message: 'Failed to get chat rooms' });
       }
     });
 
-    // Mark messages as read
     socket.on('mark-as-read', async ({ recipientId }) => {
       try {
         const [smallerId, largerId] = [userId, recipientId].sort();
@@ -156,13 +204,18 @@ const chatController = (io) => {
         const unreadCount = await chatModel.getUnreadCount(userId);
         socket.emit('unread-count', { count: unreadCount });
 
-        // Notify sender that messages were read
-        if (onlineUsers.has(recipientId)) {
-          const recipientSocketId = onlineUsers.get(recipientId);
-          io.to(recipientSocketId).emit('messages-read', {
-            userId,
-            chatRoomId
-          });
+        // Check if recipient is online and notify them
+        const recipientOnline = await redis.get(`user:${recipientId}:online`);
+
+        if (recipientOnline) {
+          const recipientSocketId = await redis.get(`user:${recipientId}:socketId`);
+
+          if (recipientSocketId) {
+            io.to(recipientSocketId).emit('messages-read', {
+              userId,
+              chatRoomId
+            });
+          }
         }
       } catch (error) {
         console.error('Error marking as read:', error);
@@ -197,16 +250,41 @@ const chatController = (io) => {
       }
     });
 
+    // Get online status of specific user
+    socket.on('check-user-status', async ({ targetUserId }) => {
+      try {
+        const isOnline = await redis.get(`user:${targetUserId}:online`);
+        socket.emit('user-status', {
+          userId: targetUserId,
+          isOnline: !!isOnline
+        });
+      } catch (error) {
+        console.error('Error checking user status:', error);
+      }
+    });
+
     // Handle disconnect
-    socket.on('disconnect',async () => {
+    socket.on('disconnect', async () => {
       console.log(`User disconnected: ${username} (${userId})`);
 
-      // Remove from online users
-      await redis.del(`user:${userId}:online`);
-      await redis.srem("online_users", userId);
+      try {
+        // Remove user data from Redis
+        await redis.del(`user:${userId}:online`);
+        await redis.del(`user:${userId}:socketId`);
+        await redis.del(`user:${userId}:username`);
+        await redis.del(`user:${userId}:activeRoom`);
 
-      // Notify all clients about updated online users
-      io.emit('online-users', Array.from(onlineUsers.keys()));
+        // Remove from online users set
+        await redis.srem("online_users", userId);
+
+        // Get updated online users list
+        const onlineUserIds = await redis.smembers("online_users");
+
+        // Notify all clients about updated online users
+        io.emit('online-users', onlineUserIds);
+      } catch (error) {
+        console.error('Error handling disconnect:', error);
+      }
     });
   });
 };

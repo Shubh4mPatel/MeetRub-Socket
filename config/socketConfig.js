@@ -23,9 +23,9 @@ const allowedOrigins = '*'
 // const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim());
 const socketConfig = {
   cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST"],
-    credentials: true
+    origin: "*",
+    credentials: true,
+    allowedHeaders: ["*"]   // ✅ allow all custom headers
   }
 };
 module.exports = socketConfig;

@@ -32,4 +32,4 @@ pool.connect((err, client, release) => {
     });
 });
 
-module.exports = pool.query.bind(pool);
+module.exports = pool;
