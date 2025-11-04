@@ -1,10 +1,12 @@
 
-const { createClient } = require("redis");
+const redis = require('redis');
 
-const redisClient = createClient({
-  url: "redis://default:yourStrongPasswordHere@localhost:6379"
+
+const redisClient = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: 6379,
+    password: process.env.REDIS_PASSWORD // Remove this line if no password
 });
-
 redisClient.on("error", (err) => console.error("Redis error:", err));
 
 redisClient.connect().then(() => {

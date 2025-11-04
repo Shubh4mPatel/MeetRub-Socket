@@ -17,7 +17,10 @@
 // };
 
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim());
+
+const allowedOrigins = '*'
+
+// const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim());
 const socketConfig = {
   cors: {
     origin: allowedOrigins,

@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Shubh4mPatel/MeetRub-Socket#readme",
   "dependencies": {
-    "amqplib": "^0.10.9",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -31,6 +30,7 @@
     "nodemailer": "^7.0.9",
     "nodemon": "^3.1.10",
     "pg": "^8.16.3",
+    "redis": "^5.9.0",
     "socketio": "^1.0.0",
     "winston": "^3.18.3"
   }

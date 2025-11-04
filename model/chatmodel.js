@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require('../config/dbConfig');
 
 const chatModel = {
   // Create or get user

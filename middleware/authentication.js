@@ -7,11 +7,11 @@ const socketAuth = (io) => {
     try {
       const cookieHeader = socket.handshake.headers.cookie;
       const parsed = cookieHeader ? cookie.parse(cookieHeader) : {};
-      const token = parsed.orangeAccessToken;
+      const token = parsed.AccessToken;
 
       if (!token) return next(new Error('Authentication error'));
       const user = jwt.verify(token, process.env.JWT_SECRET);
-      socket.user = user; // Uncommented - you'll likely need this
+      socket.user = user; 
       next();
     } catch (err) {
       console.error('Socket Auth Error:', err.message);
