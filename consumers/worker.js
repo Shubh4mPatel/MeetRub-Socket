@@ -9,16 +9,16 @@ const { startInAppConsumer } = require('./inAppConsumer');
  */
 async function startMasterWorker() {
   try {
-    console.log('🔧 Starting Master Worker (All Consumers)...\n');
+    console.log('🔧 Starting in app Worker \n');
     
     // Connect to RabbitMQ
     await connect();
     // Start all consumers
     await Promise.all([
-      // startInAppConsumer(),
+      startInAppConsumer(),
     ]);
     
-    console.log('\n✅ All consumers started successfully!');
+    console.log('\n✅ consumer started successfully!');
     console.log('📊 Master Worker is now processing all notification types\n');
   } catch (error) {
     console.error('❌ Failed to start master worker:', error);
@@ -28,7 +28,7 @@ async function startMasterWorker() {
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
-  console.log(' Shutting down Master Worker...');
+  console.log(' Shutting down in app Worker...');
   await closeConnection();
   process.exit(0);
 });

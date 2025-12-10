@@ -2,7 +2,7 @@
 const amqp = require('amqplib');
 
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL || 'amqp://localhost';
+const RABBITMQ_URL = process.env.RABBITMQ_URL;
 
 // Exchange configuration
 const EXCHANGES = {
@@ -13,19 +13,12 @@ const EXCHANGES = {
 
 // Queue names
 const QUEUES = {
-  EMAIL: 'email_queue',
   INAPP: 'inapp_queue',
-  ALL_NOTIFICATIONS: 'all_notifications_queue'
 };
 
 // Routing keys for direct/topic exchanges
 const ROUTING_KEYS = {
-  EMAIL: 'notification.email',
   INAPP: 'notification.inapp',
-  EMAIL_URGENT: 'notification.email.urgent',
-  INAPP_URGENT: 'notification.inapp.urgent',
-  ALL: 'notification.*',
-  ALL_URGENT: 'notification.*.urgent'
 };
 
 let connection = null;
@@ -101,17 +94,11 @@ async function setupExchangesAndQueues(channel) {
   console.log(`📢 Created FANOUT exchange: ${EXCHANGES.NOTIFICATIONS_FANOUT}`);
 
   // 4. Create queues
-  await channel.assertQueue(QUEUES.EMAIL, { durable: true });
   await channel.assertQueue(QUEUES.INAPP, { durable: true });
-  await channel.assertQueue(QUEUES.ALL_NOTIFICATIONS, { durable: true });
   console.log('📬 Created all queues');
 
   // 5. Bind queues to DIRECT exchange with specific routing keys
-  await channel.bindQueue(
-    QUEUES.EMAIL, 
-    EXCHANGES.NOTIFICATIONS, 
-    ROUTING_KEYS.EMAIL
-  );
+ 
   await channel.bindQueue(
     QUEUES.INAPP, 
     EXCHANGES.NOTIFICATIONS, 
@@ -120,26 +107,14 @@ async function setupExchangesAndQueues(channel) {
   console.log('🔗 Bound queues to DIRECT exchange');
 
   // 6. Bind queues to TOPIC exchange with pattern matching
-  // Email queue receives: notification.email and notification.email.urgent
-  await channel.bindQueue(
-    QUEUES.EMAIL, 
-    EXCHANGES.NOTIFICATIONS_TOPIC, 
-    'notification.email.*'
-  );
-  // SMS queue receives: notification.sms and notification.sms.urgent
+
   await channel.bindQueue(
     QUEUES.INAPP, 
     EXCHANGES.NOTIFICATIONS_TOPIC, 
     'notification.inapp.*'
   );
 
-  // All notifications queue receives everything with pattern notification.*.*
-  await channel.bindQueue(
-    QUEUES.ALL_NOTIFICATIONS, 
-    EXCHANGES.NOTIFICATIONS_TOPIC, 
-    'notification.#'
-  );
-  console.log('🔗 Bound queues to TOPIC exchange');
+
 
   // 7. Bind all queues to FANOUT exchange (broadcasts to all)
   await channel.bindQueue(
