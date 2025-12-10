@@ -3,13 +3,16 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const AppError = require('../utils/appError');
 const { query } = require('../config/dbConfig'); // Assuming you have a db module for querying
-const logger = require('../utils/logger'); // Assuming you have a logger utility
+const {logger} = require('../utils/logger'); // Assuming you have a logger utility
 
 
 const socketAuth = (io) => {
   io.use(async (socket, next) => {
     try {
-      const token = socket.handshake.query.token;
+      // Parse cookies from handshake
+      const cookieHeader = socket.handshake.headers.cookie;
+      const cookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+      const token = cookies.AccessToken;
 
       if (token && token !== 'null' && token !== 'undefined' && token.trim() !== '') {
         try {

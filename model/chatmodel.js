@@ -67,9 +67,9 @@ const chatModel = {
         m.message,
         m.is_read,
         m.created_at,
-        u.username as sender_username
+        u.user_name as sender_username
       FROM messages m
-      JOIN users u ON m.sender_id = u.user_id
+      JOIN users u ON m.sender_id = u.id
       WHERE m.room_id = $1
       ORDER BY m.created_at DESC
       LIMIT $2 OFFSET $3
@@ -92,14 +92,14 @@ const chatModel = {
         cr.user1_id,
         cr.user2_id,
         cr.created_at as room_created_at,
-        u1.username as user1_username,
-        u2.username as user2_username,
+        u1.user_name as user1_username,
+        u2.user_name as user2_username,
         m.message as last_message,
         m.created_at as last_message_time,
         m.sender_id as last_message_sender
       FROM chat_rooms cr
-      LEFT JOIN users u1 ON cr.user1_id = u1.user_id
-      LEFT JOIN users u2 ON cr.user2_id = u2.user_id
+      LEFT JOIN users u1 ON cr.user1_id = u1.id
+      LEFT JOIN users u2 ON cr.user2_id = u2.id
       LEFT JOIN LATERAL (
         SELECT message, created_at, sender_id
         FROM messages
@@ -184,9 +184,9 @@ const chatModel = {
         m.recipient_id,
         m.message,
         m.created_at,
-        u.username as sender_username
+        u.user_name as sender_username
       FROM messages m
-      JOIN users u ON m.sender_id = u.user_id
+      JOIN users u ON m.sender_id = u.id
       JOIN chat_rooms cr ON m.room_id = cr.room_id
       WHERE (cr.user1_id = $1 OR cr.user2_id = $1)
         AND m.message ILIKE $2

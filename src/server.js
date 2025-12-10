@@ -32,8 +32,8 @@ app.get('/health', (req, res) => {
 });
 
 // Handle undefined routes
-app.all('*', (req, res, next) => {
-  next(new AppError(`Cannot find ${req.originalUrl} on this server`, 404));
+app.use((req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 // Global error handling middleware
@@ -88,12 +88,12 @@ const HOST = process.env.HOST || ''
 if (process.env.NODE_ENV !== 'development') {
   serverWithSocket = server.listen(PORT, HOST, () => {
     manageLogFiles();
-    startMasterWorker();
+    // startMasterWorker();
     logger.info(`Server running in ${process.env.NODE_ENV} mode on ${HOST}:${PORT}`);
   });
 } else {
   serverWithSocket = server.listen(PORT, () => {
-    startMasterWorker();
+    // startMasterWorker();
     manageLogFiles();
     logger.info(`Server running in ${process.env.NODE_ENV} mode on ${HOST}:${PORT}`);
   });

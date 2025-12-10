@@ -15,7 +15,7 @@ async function startMasterWorker() {
     await connect();
     // Start all consumers
     await Promise.all([
-      startInAppConsumer(),
+      // startInAppConsumer(),
     ]);
     
     console.log('\n✅ consumer started successfully!');

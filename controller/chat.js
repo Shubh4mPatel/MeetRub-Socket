@@ -38,6 +38,7 @@ const chatController = (io) => {
     // Join a private chat room
     socket.on('join-chat', async ({ recipientId }) => {
       try {
+        console.log(`${username} is joining chat with user ID: ${recipientId}`);
         // Create a unique room ID (sorted to ensure same room for both users)
         const [smallerId, largerId] = [userId, recipientId].sort();
         const chatRoomId = `${smallerId}-${largerId}`;
@@ -275,10 +276,10 @@ const chatController = (io) => {
         await redis.del(`user:${userId}:activeRoom`);
 
         // Remove from online users set
-        await redis.srem("online_users", userId);
+        await redis.sRem("online_users", `${userId}`);
 
         // Get updated online users list
-        const onlineUserIds = await redis.smembers("online_users");
+        const onlineUserIds = await redis.sMembers("online_users");
 
         // Notify all clients about updated online users
         io.emit('online-users', onlineUserIds);
